@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Global {
+namespace TopLevel {
    public class Game1 : Game {
       GraphicsDeviceManager graphics;
       SpriteBatch spriteBatch;
@@ -52,7 +52,7 @@ namespace Global {
          GraphicsDevice.Clear(Color.White);
          spriteBatch.Begin();
 
-         scene.Render(gameTime);
+         scene.Draw(gameTime);
 
          spriteBatch.End();
          base.Draw(gameTime);

@@ -1,12 +1,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Global {
+namespace TopLevel {
    public class Scene {
       Texture2D texture;
 
-      Components.Transform[] transforms;
-      Components.Body[] bodies;
+      ECS.ComponentList<Components.Transform> transforms;
+      ECS.ComponentList<Components.Body> bodies;
 
       Systems.Physics physics;
       Systems.Renderer renderer;
@@ -18,8 +18,8 @@ namespace Global {
          game = g;
          spriteBatch = sb;
 
-         transforms = new Components.Transform[2];
-         bodies = new Components.Body[2];
+         transforms = new ECS.ComponentList<Components.Transform>();
+         bodies = new ECS.ComponentList<Components.Body>();
 
          physics = new Systems.Physics();
          renderer = new Systems.Renderer();
@@ -31,21 +31,23 @@ namespace Global {
             colorData[i] = Color.DarkRed;
          texture.SetData<Color>(colorData);
 
-         transforms[0].position.X = 100;
-         transforms[0].position.Y = 200;
-         transforms[1].position.X = 100;
-         transforms[1].position.Y = 100;
-         bodies[0].velocity.X = 0;
-         bodies[0].velocity.Y = 0;
-         bodies[1].velocity.X = 0;
-         bodies[1].velocity.Y = 0;
+         transforms.data[0].position.X = 100;
+         transforms.data[0].position.Y = 200;
+         transforms.data[1].position.X = 100;
+         transforms.data[1].position.Y = 100;
+         transforms.size = 2;
+         bodies.data[0].velocity.X = 0;
+         bodies.data[0].velocity.Y = 0;
+         bodies.data[1].velocity.X = 0;
+         bodies.data[1].velocity.Y = 0;
+         bodies.size = 2;
       }
 
       public void Update(GameTime gameTime) {
          physics.Update(gameTime, transforms, bodies, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
       }
 
-      public void Render(GameTime gameTime) {
+      public void Draw(GameTime gameTime) {
          renderer.Draw(transforms, spriteBatch, texture);
       }
    }

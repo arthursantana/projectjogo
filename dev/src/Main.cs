@@ -1,6 +1,6 @@
 using System;
 
-namespace Global {
+namespace TopLevel {
    public static class Program {
       [STAThread]
       static void Main() {
