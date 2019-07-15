@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TopLevel {
    public class Scene {
@@ -21,7 +22,7 @@ namespace TopLevel {
          transforms = new ECS.ComponentList<Components.Transform>();
          bodies = new ECS.ComponentList<Components.Body>();
 
-         physics = new Systems.Physics();
+         physics = new Systems.Physics(transforms);
          renderer = new Systems.Renderer();
 
          int size = 50;
@@ -44,7 +45,7 @@ namespace TopLevel {
       }
 
       public void Update(GameTime gameTime) {
-         physics.Update(gameTime, transforms, bodies, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+         physics.Update(gameTime, bodies, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
       }
 
       public void Draw(GameTime gameTime) {

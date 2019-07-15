@@ -3,10 +3,14 @@ using System;
 
 namespace Systems {
    public class Physics {
+      public ECS.ComponentList<Components.Transform> transforms;
+
+      public Physics(ECS.ComponentList<Components.Transform> t) {
+         transforms = t;
+      }
 
       Random random = new Random();
-
-      public void Update(GameTime gameTime, ECS.ComponentList<Components.Transform> transforms, ECS.ComponentList<Components.Body> bodies, int W, int H) {
+      public void Update(GameTime gameTime, ECS.ComponentList<Components.Body> bodies, int W, int H) {
          int size = 50;
          for (int i = 0; i < transforms.size; i++) {
             bodies.data[i].velocity.X += size * (float) (random.NextDouble() - 0.5);
