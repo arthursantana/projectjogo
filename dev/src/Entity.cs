@@ -1,5 +1,5 @@
 namespace ECS {
-   public class Entity {
-      int id;
+   public struct Entity {
+      public int id;
    }
 }

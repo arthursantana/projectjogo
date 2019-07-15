@@ -5,11 +5,21 @@
    - sibling components
    - sistemas guardarem ponteiro pra lista chave de componentes? não funciona se for realocado; como endereçar?
    - usar List<T> ou escrever código de vetores dinâmicos
-- asset loading
+- asset loading: https://www.gamefromscratch.com/post/2015/06/19/MonoGame-Tutorial-Textures-and-SpriteBatch.aspx
+- loading screen
+- cenas
+   - free nos componentes, entidades, etc
 - menus
+   - entrada
+   - in-game
 - settings
-- mapa
-- animações
-- porrada
-- scripting?
+- core
+   - input: https://www.gamefromscratch.com/post/2015/06/28/MonoGame-Tutorial-Handling-Keyboard-Mouse-and-GamePad-Input.aspx
+   - mapa
+   - animações
+   - porrada
+- verificar memory leaks de forma geral: equivalente do valgrind pra C#?
+- metajogo
+   - seleção de fases? matchmaking? historinha?
 - load / save?
+- rede?
