@@ -11,7 +11,7 @@ namespace Scenes {
 
       Systems.Physics physics;
       Systems.Renderer renderer;
-      
+
       public TestScene(TopLevel.Game1 g, SpriteBatch sb) : base(g, sb) {
          transforms = RegisterComponentList<Components.Transform>();
          bodies = RegisterComponentList<Components.Body>();
@@ -29,7 +29,7 @@ namespace Scenes {
          colors[2] = Color.DarkBlue * 0.5f;
          colors[3] = Color.Black * 0.5f;
          colors[4] = Color.DarkGray * 0.5f;
-         for (int iter = 0; iter < 2500; iter++) {
+         for (int iter = 0; iter < 2000; iter++) {
             id = transforms.newItem();
             transforms.data[id].position.X = 200;
             transforms.data[id].position.Y = 200;
@@ -39,7 +39,7 @@ namespace Scenes {
             bodies.data[id].velocity.Y = 0;
 
             id = avatars.newItem();
-            size = (int) (15.0 * random.NextDouble() + 1);
+            size = (int) (75.0 * random.NextDouble() + 1);
             avatars.data[id].texture = new Texture2D(game.GraphicsDevice, size, size);
             colorData = new Color[size * size];
             c = colors[random.Next() % 5];

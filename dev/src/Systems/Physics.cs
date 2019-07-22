@@ -11,7 +11,7 @@ namespace Systems {
 
       Random random = new Random();
       public void Update(GameTime gameTime, Util.Pool<Components.Body> bodies, int W, int H) {
-         int temperature = 50;
+         int temperature = 5;
          for (ushort i = 0; i < transforms.size; i++) {
             bodies.data[i].velocity.X += temperature * (float) (random.NextDouble() - 0.5);
             bodies.data[i].velocity.Y += temperature * (float) (random.NextDouble() - 0.5);
