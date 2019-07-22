@@ -8,7 +8,7 @@ namespace TopLevel {
       GraphicsDeviceManager graphics;
       SpriteBatch spriteBatch;
 
-      Scene scene;
+      Scenes.TestScene scene;
 
       public Game1() {
          graphics = new GraphicsDeviceManager(this);
@@ -29,7 +29,7 @@ namespace TopLevel {
 
          base.Initialize();
 
-         scene = new Scene(this, spriteBatch);
+         scene = new Scenes.TestScene(this, spriteBatch);
       }
 
       protected override void LoadContent() {
@@ -50,7 +50,7 @@ namespace TopLevel {
 
       protected override void Draw(GameTime gameTime) {
          GraphicsDevice.Clear(Color.White);
-         spriteBatch.Begin();
+         spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
          scene.Draw(gameTime);
 

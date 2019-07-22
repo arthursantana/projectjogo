@@ -1,6 +1,6 @@
 namespace Util {
    public class Pool<T> {
-      public static int MAXENTITIES = 10; // 32000 (tamanho de um short)? dinâmico (provavelmente sim no futuro)?
+      public static ushort MAXENTITIES = 20000; // 32000 (tamanho de um short)? dinâmico (provavelmente sim no futuro)?
 
       public T[] data;
       public ushort size;
@@ -8,6 +8,10 @@ namespace Util {
       public Pool() {
          data = new T[MAXENTITIES];
          size = 0;
+      }
+
+      public ushort newItem() {
+         return size++;
       }
    }
 }
