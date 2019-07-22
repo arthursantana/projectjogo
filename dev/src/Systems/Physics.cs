@@ -3,16 +3,16 @@ using System;
 
 namespace Systems {
    public class Physics {
-      public ECS.ComponentList<Components.Transform> transforms;
+      public Util.Pool<Components.Transform> transforms;
 
-      public Physics(ECS.ComponentList<Components.Transform> t) {
+      public Physics(Util.Pool<Components.Transform> t) {
          transforms = t;
       }
 
       Random random = new Random();
-      public void Update(GameTime gameTime, ECS.ComponentList<Components.Body> bodies, int W, int H) {
+      public void Update(GameTime gameTime, Util.Pool<Components.Body> bodies, int W, int H) {
          int size = 50;
-         for (int i = 0; i < transforms.size; i++) {
+         for (ushort i = 0; i < transforms.size; i++) {
             bodies.data[i].velocity.X += size * (float) (random.NextDouble() - 0.5);
             bodies.data[i].velocity.Y += size * (float) (random.NextDouble() - 0.5);
             transforms.data[i].position.X += bodies.data[i].velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds;

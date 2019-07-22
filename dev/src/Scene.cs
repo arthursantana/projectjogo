@@ -1,26 +1,47 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace TopLevel {
    public class Scene {
+      SpriteBatch spriteBatch;
+      Game1 game;
+      Dictionary<Type, ushort> componentIndices;
+      ushort numComponents;
+
+
+      // the rest of the attributes are a specialization, won't be in the base class
       Texture2D texture;
 
-      ECS.ComponentList<Components.Transform> transforms;
-      ECS.ComponentList<Components.Body> bodies;
+      Util.Pool<Components.Transform> transforms;
+      Util.Pool<Components.Body> bodies;
 
       Systems.Physics physics;
       Systems.Renderer renderer;
 
-      SpriteBatch spriteBatch;
-      Game1 game;
+      public Util.Pool<T> RegisterComponentList<T>() {
+         Util.Pool<T> list = new Util.Pool<T>();
+
+         componentIndices.Add(typeof(T), numComponents);
+         numComponents++;
+
+         return list;
+      }
    
       public Scene(Game1 g, SpriteBatch sb) {
          game = g;
          spriteBatch = sb;
 
-         transforms = new ECS.ComponentList<Components.Transform>();
-         bodies = new ECS.ComponentList<Components.Body>();
+         componentIndices = new Dictionary<Type, ushort>();
+         numComponents = 0;
+
+         // same as above
+         transforms = RegisterComponentList<Components.Transform>();
+         bodies = RegisterComponentList<Components.Body>();
+
+         Console.WriteLine(componentIndices[typeof(Components.Transform)]);
+         Console.WriteLine(componentIndices[typeof(Components.Body)]);
 
          physics = new Systems.Physics(transforms);
          renderer = new Systems.Renderer();

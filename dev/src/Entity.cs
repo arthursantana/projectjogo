@@ -1,5 +1,10 @@
 namespace ECS {
-   public struct Entity {
-      public int id;
+   public class Entity {
+      public ushort id;
+      public ushort[] components;
+
+      public Entity(ushort numComponents) {
+         components = new ushort[numComponents];
+      }
    }
 }
