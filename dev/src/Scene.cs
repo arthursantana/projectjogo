@@ -3,32 +3,33 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace TopLevel {
+namespace ECS {
    public class Scene {
+      protected TopLevel.Game1 game;
       protected SpriteBatch spriteBatch;
-      protected Game1 game;
-      protected Dictionary<Type, ushort> componentIndices;
+
+      protected Dictionary<Type, ushort> componentListIndices;
       protected ushort numComponents;
 
-      public Scene(Game1 g, SpriteBatch sb) {
+      public Scene(TopLevel.Game1 g, SpriteBatch sb) {
          game = g;
          spriteBatch = sb;
 
-         componentIndices = new Dictionary<Type, ushort>();
+         componentListIndices = new Dictionary<Type, ushort>();
          numComponents = 0;
-      }
-
-      public Util.Pool<T> RegisterComponentList<T>() {
-         Util.Pool<T> list = new Util.Pool<T>();
-
-         componentIndices.Add(typeof(T), numComponents);
-         numComponents++;
-
-         return list;
       }
 
       public void Update(GameTime gameTime) {}
 
       public void Draw(GameTime gameTime) {}
+
+      public ECS.ComponentList<T> RegisterComponentList<T>() {
+         ECS.ComponentList<T> list = new ECS.ComponentList<T>();
+
+         componentListIndices.Add(typeof(T), numComponents);
+         numComponents++;
+
+         return list;
+      }
    }
 }

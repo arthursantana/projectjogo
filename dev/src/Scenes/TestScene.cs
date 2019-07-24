@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 
 namespace Scenes {
-   public class TestScene : TopLevel.Scene {
-      Util.Pool<Components.Transform> transforms;
-      Util.Pool<Components.Body> bodies;
-      Util.Pool<Components.Avatar> avatars;
+   public class TestScene : ECS.Scene {
+      ECS.ComponentList<Components.Transform> transforms;
+      ECS.ComponentList<Components.Body> bodies;
+      ECS.ComponentList<Components.Avatar> avatars;
 
       Systems.Physics physics;
       Systems.Renderer renderer;
@@ -17,11 +17,11 @@ namespace Scenes {
          bodies = RegisterComponentList<Components.Body>();
          avatars = RegisterComponentList<Components.Avatar>();
 
-         physics = new Systems.Physics(transforms);
-         renderer = new Systems.Renderer();
+         physics = new Systems.Physics(transforms, bodies);
+         renderer = new Systems.Renderer(transforms, avatars);
 
          Random random = new Random();
-         ushort id; int size; Color[] colorData; Color c;
+         ushort pos; int size; Color[] colorData; Color c;
 
          Color[] colors = new Color[5];
          colors[0] = Color.DarkRed * 0.5f;
@@ -29,32 +29,32 @@ namespace Scenes {
          colors[2] = Color.DarkBlue * 0.5f;
          colors[3] = Color.Black * 0.5f;
          colors[4] = Color.DarkGray * 0.5f;
-         for (int iter = 0; iter < 2000; iter++) {
-            id = transforms.newItem();
-            transforms.data[id].position.X = 200;
-            transforms.data[id].position.Y = 200;
+         for (ushort entityId = 0; entityId < 10; entityId++) {
+            pos = transforms.newItem(entityId);
+            transforms.data[pos].position.X = 200;
+            transforms.data[pos].position.Y = 200;
 
-            id = bodies.newItem();
-            bodies.data[id].velocity.X = 0;
-            bodies.data[id].velocity.Y = 0;
+            pos = bodies.newItem(entityId);
+            bodies.data[pos].velocity.X = 0;
+            bodies.data[pos].velocity.Y = 0;
 
-            id = avatars.newItem();
+            pos = avatars.newItem(entityId);
             size = (int) (75.0 * random.NextDouble() + 1);
-            avatars.data[id].texture = new Texture2D(game.GraphicsDevice, size, size);
+            avatars.data[pos].texture = new Texture2D(game.GraphicsDevice, size, size);
             colorData = new Color[size * size];
             c = colors[random.Next() % 5];
             for (int i = 0; i < size*size; i++)
                colorData[i] = c;
-            avatars.data[id].texture.SetData<Color>(colorData);
+            avatars.data[pos].texture.SetData<Color>(colorData);
          }
       }
 
       public new void Update(GameTime gameTime) {
-         physics.Update(gameTime, bodies, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+         physics.Update(gameTime, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
       }
 
       public new void Draw(GameTime gameTime) {
-         renderer.Draw(gameTime, spriteBatch, transforms, avatars);
+         renderer.Draw(gameTime, spriteBatch);
       }
    }
 }
