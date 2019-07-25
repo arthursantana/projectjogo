@@ -17,8 +17,8 @@ namespace TopLevel {
          Window.Title = "What's a title?";
          IsFixedTimeStep = false;
 
-         graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-         graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+         graphics.PreferredBackBufferWidth = 640;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+         graphics.PreferredBackBufferHeight = 360;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
          graphics.IsFullScreen = true;
          graphics.SynchronizeWithVerticalRetrace = true;
          graphics.ApplyChanges();
