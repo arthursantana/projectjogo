@@ -17,8 +17,8 @@ namespace TopLevel {
          Window.Title = "What's a title?";
          IsFixedTimeStep = false;
 
-         graphics.PreferredBackBufferWidth = 640;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-         graphics.PreferredBackBufferHeight = 360;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+         graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+         graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
          graphics.IsFullScreen = true;
          graphics.SynchronizeWithVerticalRetrace = true;
          graphics.ApplyChanges();
@@ -49,7 +49,7 @@ namespace TopLevel {
       }
 
       protected override void Draw(GameTime gameTime) {
-         GraphicsDevice.Clear(Color.White);
+         GraphicsDevice.Clear(Color.Black);
          spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
          scene.Draw(gameTime);

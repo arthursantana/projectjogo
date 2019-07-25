@@ -6,9 +6,13 @@ namespace Systems {
       ECS.ComponentList<Components.Transform> transforms;
       ECS.ComponentList<Components.Body> bodies;
 
-      public Physics(ECS.ComponentList<Components.Transform> t, ECS.ComponentList<Components.Body> b) {
+      int bodiesPos;
+
+      public Physics(ECS.ComponentList<Components.Transform> t, int tPos, ECS.ComponentList<Components.Body> b, int bPos) {
          transforms = t;
          bodies = b;
+
+         bodiesPos = bPos;
       }
 
       Random random = new Random();
@@ -17,10 +21,16 @@ namespace Systems {
          int temperature = 5;
 
          for (ushort i = 0; i < transforms.size; i++) {
-            bodies.data[i].velocity.X += temperature * (float) (random.NextDouble() - 0.5);
-            bodies.data[i].velocity.Y += temperature * (float) (random.NextDouble() - 0.5);
-            transforms.data[i].position.X += bodies.data[i].velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds;
-            transforms.data[i].position.Y += bodies.data[i].velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            ECS.Entity entity = transforms.metadata[i].entity;
+            int j; // entity body index
+
+            if (entity.components[bodiesPos] == -1) continue;
+            else j = entity.components[bodiesPos];
+
+            bodies.data[j].velocity.X += temperature * (float) (random.NextDouble() - 0.5);
+            bodies.data[j].velocity.Y += temperature * (float) (random.NextDouble() - 0.5);
+            transforms.data[i].position.X += bodies.data[j].velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            transforms.data[i].position.Y += bodies.data[j].velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds;
             if (transforms.data[i].position.X > W)
                transforms.data[i].position.X = 0;
             if (transforms.data[i].position.Y > H)
@@ -31,6 +41,5 @@ namespace Systems {
                transforms.data[i].position.Y = H;
          }
       }
-
    }
 }

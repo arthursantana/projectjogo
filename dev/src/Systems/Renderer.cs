@@ -6,16 +6,25 @@ namespace Systems {
       ECS.ComponentList<Components.Transform> transforms;
       ECS.ComponentList<Components.Avatar> avatars;
 
-      public Renderer(ECS.ComponentList<Components.Transform> t, ECS.ComponentList<Components.Avatar> a) {
+      int transformsPos;
+
+      public Renderer(ECS.ComponentList<Components.Transform> t, int tPos, ECS.ComponentList<Components.Avatar> a, int aPos) {
          transforms = t;
          avatars = a;
+
+         transformsPos = tPos;
       }
 
       public void Draw(GameTime gameTime, SpriteBatch spriteBatch) {
-         for (ushort i = 0; i < transforms.size; i++) {
-            spriteBatch.Draw(avatars.data[i].texture, transforms.data[i].position, Color.White);
+         for (ushort i = 0; i < avatars.size; i++) {
+            ECS.Entity entity = avatars.metadata[i].entity;
+            int j; // entity transform index
+
+            if (entity.components[transformsPos] == -1) continue;
+            else j = entity.components[transformsPos];
+
+            spriteBatch.Draw(avatars.data[i].texture, transforms.data[j].position, Color.White);
          }
       }
-
    }
 }

@@ -1,11 +1,11 @@
 namespace ECS {
    public struct Metadata {
-      public ushort entityId;
+      public ECS.Entity entity;
       public bool alive;
    }
 
    public class ComponentList<T> {
-      static ushort MAXENTITIES = 2000; // 32000 (tamanho de um short)? dinâmico (provavelmente sim no futuro)?
+      static ushort MAXENTITIES = 32000; // 32000 (tamanho de um short)? dinâmico (provavelmente sim no futuro)?
 
       public T[] data;
       public Metadata[] metadata;
@@ -17,8 +17,8 @@ namespace ECS {
          size = 0;
       }
 
-      public ushort newItem(ushort eId) {
-         metadata[size].entityId = eId;
+      public ushort NewItem(ECS.Entity e) {
+         metadata[size].entity = e;;
          metadata[size].alive = true;
 
          return size++;

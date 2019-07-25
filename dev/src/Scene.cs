@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 namespace ECS {
    public class Scene {
-      protected TopLevel.Game1 game;
+      public TopLevel.Game1 game;
       protected SpriteBatch spriteBatch;
 
       protected Dictionary<Type, ushort> componentListIndices;
       protected ushort numComponents;
+
+      protected ushort lastEntity;
 
       public Scene(TopLevel.Game1 g, SpriteBatch sb) {
          game = g;
@@ -17,6 +19,8 @@ namespace ECS {
 
          componentListIndices = new Dictionary<Type, ushort>();
          numComponents = 0;
+
+         lastEntity = 0;
       }
 
       public void Update(GameTime gameTime) {}
@@ -30,6 +34,20 @@ namespace ECS {
          numComponents++;
 
          return list;
+      }
+
+      public ushort AttachComponent<T>(ECS.Entity e, ComponentList<T> list) {
+         ushort posComponent = componentListIndices[typeof(T)];
+
+         e.components[posComponent] = list.NewItem(e);
+
+         return (ushort) e.components[posComponent];
+      }
+
+      public ECS.Entity NewEntity() {
+            ECS.Entity e = new ECS.Entity(lastEntity++, (ushort) componentListIndices.Count);
+
+            return e;
       }
    }
 }
