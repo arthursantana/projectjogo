@@ -4,7 +4,7 @@ using System;
 
 namespace Prefabs {
    public static class TestSquare {
-      public static void create(ECS.Scene scene,
+      public static void Create(ECS.Scene scene,
             ECS.ComponentList<Components.Transform> transforms,
             ECS.ComponentList<Components.Body> bodies,
             ECS.ComponentList<Components.Avatar> avatars,

@@ -4,7 +4,7 @@ using System;
 
 namespace Prefabs {
    public static class TestStill {
-      public static void create(ECS.Scene scene,
+      public static void Create(ECS.Scene scene,
             ECS.ComponentList<Components.Transform> transforms,
             ECS.ComponentList<Components.Avatar> avatars,
             Random random) {
