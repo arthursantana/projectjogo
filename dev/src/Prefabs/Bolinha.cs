@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace Prefabs {
-   public static class TestSquare {
+   public static class Bolinha {
       public static void Create(ECS.Scene scene,
             ECS.ComponentList<Components.Transform> transforms,
             ECS.ComponentList<Components.Body> bodies,
             ECS.ComponentList<Components.Avatar> avatars,
             Random random) {
-         ushort pos; int size; Color[] colorData; Color c;
+         ushort pos; //int size; Color[] colorData; Color c;
 
          Color[] colors = new Color[5];
          colors[0] = Color.DarkRed * 0.5f;
@@ -29,13 +29,16 @@ namespace Prefabs {
          bodies.data[pos].velocity.Y = 0;
 
          pos = scene.AttachComponent<Components.Avatar>(e, avatars);
-         size = (int) (8.0 * random.NextDouble() + 1);
-         avatars.data[pos].texture = new Texture2D(scene.game.GraphicsDevice, size, size);
-         colorData = new Color[size * size];
-         c = colors[random.Next() % 5];
-         for (int i = 0; i < size*size; i++)
-            colorData[i] = c;
-         avatars.data[pos].texture.SetData<Color>(colorData);
+         avatars.data[pos].texture = scene.game.Content.Load<Texture2D>("bolinha_trans");
+         avatars.data[pos].isSpriteSheet = true;
+         avatars.data[pos].timeOffset = random.Next();
+         //size = (int) (8.0 * random.NextDouble() + 1);
+         //avatars.data[pos].texture = new Texture2D(scene.game.GraphicsDevice, size, size);
+         //colorData = new Color[size * size];
+         //c = colors[random.Next() % 5];
+         //for (int i = 0; i < size*size; i++)
+         //   colorData[i] = c;
+         //avatars.data[pos].texture.SetData<Color>(colorData);
       }
    }
 }

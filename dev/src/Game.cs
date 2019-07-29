@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace TopLevel {
@@ -33,10 +34,13 @@ namespace TopLevel {
       }
 
       protected override void LoadContent() {
+         Song song = Content.Load<Song>("foi");
+         MediaPlayer.Play(song);
       }
 
       protected override void UnloadContent()
       {
+         Content.Unload();
       }
 
       protected override void Update(GameTime gameTime) {

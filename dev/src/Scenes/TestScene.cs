@@ -27,11 +27,8 @@ namespace Scenes {
                );
 
          Random random = new Random();
-         for (ushort i = 0; i < 5000; i++) {
-            if (random.NextDouble() > 0.5)
-               Prefabs.TestSquare.Create(this, transforms, bodies, avatars, random);
-            else
-               Prefabs.TestStill.Create(this, transforms, avatars, random);
+         for (ushort i = 0; i < 2000; i++) {
+            Prefabs.Bolinha.Create(this, transforms, bodies, avatars, random);
          }
       }
 
