@@ -23,8 +23,11 @@ namespace Systems {
             if (entity.components[transformsPos] == -1) continue;
             else j = entity.components[transformsPos];
 
+            int SKIP = 32;
+            int W = 32;
+            int H = 32;
             if (avatars.data[i].isSpriteSheet)
-               spriteBatch.Draw(avatars.data[i].texture, transforms.data[j].position, new Rectangle(32*(((int) gameTime.TotalGameTime.TotalMilliseconds / 100 + avatars.data[i].timeOffset) % 13), 0, 32, 32), Color.White);
+               spriteBatch.Draw(avatars.data[i].texture, transforms.data[j].position, new Rectangle(SKIP*(((int) gameTime.TotalGameTime.TotalMilliseconds / 50 + avatars.data[i].timeOffset) % 13), 0, W, H), Color.White);
             else
                spriteBatch.Draw(avatars.data[i].texture, transforms.data[j].position, Color.White);
          }

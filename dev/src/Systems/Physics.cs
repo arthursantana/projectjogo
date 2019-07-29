@@ -35,9 +35,9 @@ namespace Systems {
                transforms.data[i].position.X = 0;
             if (transforms.data[i].position.Y > H)
                transforms.data[i].position.Y = 0;
-            if (transforms.data[i].position.X < -100)
+            if (transforms.data[i].position.X < -32)
                transforms.data[i].position.X = W;
-            if (transforms.data[i].position.Y < -100)
+            if (transforms.data[i].position.Y < -32)
                transforms.data[i].position.Y = H;
          }
       }

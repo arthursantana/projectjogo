@@ -53,7 +53,7 @@ namespace TopLevel {
       }
 
       protected override void Draw(GameTime gameTime) {
-         GraphicsDevice.Clear(Color.Black);
+         GraphicsDevice.Clear(Color.White);
          spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
          scene.Draw(gameTime);
