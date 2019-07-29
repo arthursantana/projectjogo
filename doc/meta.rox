@@ -1,7 +1,7 @@
 - terminar o esquema de ECS: escrever código de vetores dinâmicos
-- asset loading: https://www.gamefromscratch.com/post/2015/06/19/MonoGame-Tutorial-Textures-and-SpriteBatch.aspx
-- loading screen
 - cenas
+   - loading screen
+      - pre-load dos assets que serão usados na cena
    - free nos componentes, entidades, etc
 - menus
    - entrada
@@ -17,3 +17,4 @@
    - seleção de fases? matchmaking? historinha?
 - load / save?
 - rede?
+- gerar os conteúdos para Windows em vez de DesktopGL?
