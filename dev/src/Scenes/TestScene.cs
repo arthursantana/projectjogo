@@ -27,7 +27,7 @@ namespace Scenes {
                );
 
          Random random = new Random();
-         for (ushort i = 0; i < 10000; i++) {
+         for (ushort i = 0; i < 2000; i++) {
             Prefabs.Bolinha.Create(this, transforms, bodies, avatars, random);
          }
       }

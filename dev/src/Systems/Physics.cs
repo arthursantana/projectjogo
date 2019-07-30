@@ -18,7 +18,7 @@ namespace Systems {
       Random random = new Random();
 
       public void Update(GameTime gameTime, int W, int H) {
-         int temperature = 5;
+         int temperature = 2;
 
          for (ushort i = 0; i < transforms.size; i++) {
             ECS.Entity entity = transforms.metadata[i].entity;

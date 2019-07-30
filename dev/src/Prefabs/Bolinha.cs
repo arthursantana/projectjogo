@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace Prefabs {
    public static class Bolinha {
@@ -9,14 +10,7 @@ namespace Prefabs {
             ECS.ComponentList<Components.Body> bodies,
             ECS.ComponentList<Components.Avatar> avatars,
             Random random) {
-         ushort pos; //int size; Color[] colorData; Color c;
-
-         Color[] colors = new Color[5];
-         colors[0] = Color.DarkRed * 0.5f;
-         colors[1] = Color.Red * 0.5f;
-         colors[2] = Color.Orange * 0.5f;
-         colors[3] = Color.Yellow * 0.5f;
-         colors[4] = Color.Pink * 0.5f;
+         ushort pos;
 
          ECS.Entity e = scene.NewEntity();
 
@@ -29,16 +23,13 @@ namespace Prefabs {
          bodies.data[pos].velocity.Y = 0;
 
          pos = scene.AttachComponent<Components.Avatar>(e, avatars);
-         avatars.data[pos].texture = scene.game.Content.Load<Texture2D>("bolinha_trans");
-         avatars.data[pos].isSpriteSheet = true;
-         avatars.data[pos].timeOffset = random.Next();
-         //size = (int) (8.0 * random.NextDouble() + 1);
-         //avatars.data[pos].texture = new Texture2D(scene.game.GraphicsDevice, size, size);
-         //colorData = new Color[size * size];
-         //c = colors[random.Next() % 5];
-         //for (int i = 0; i < size*size; i++)
-         //   colorData[i] = c;
-         //avatars.data[pos].texture.SetData<Color>(colorData);
+         avatars.data[pos].animations = new Dictionary<string, Components.Animation>();
+
+         Components.Animation andando = new Components.Animation(scene, "bolinha_trans", 32, 32, new int[] {500, 300, 200, 100, 100, 100, 100, 100, 100, 100, 100, 200, 300}, true);
+         Components.Animation parada = new Components.Animation(scene, "bolinha_trans", 32, 32, new int[] {1}, false);
+         avatars.data[pos].animations.Add("parada", parada);
+         avatars.data[pos].animations.Add("andando", andando);
+         avatars.data[pos].currentAnimation = andando;
       }
    }
 }
