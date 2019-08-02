@@ -28,9 +28,9 @@ namespace Components {
          double timeSpent = gameTime.ElapsedGameTime.TotalMilliseconds;
 
          while (timeSpent > 0) {
-            if (!isALoop && currentFrame == numberOfFrames) return;
+            if (!isALoop && ((currentFrame + 1) == numberOfFrames)) return;
 
-            if (timeSpent > timeLeftInFrame) {
+            if (timeSpent >= timeLeftInFrame) {
                timeSpent -= timeLeftInFrame;
                currentFrame = (currentFrame + 1) % numberOfFrames;
                timeLeftInFrame = frames[currentFrame];

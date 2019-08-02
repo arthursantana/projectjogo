@@ -25,8 +25,8 @@ namespace Prefabs {
          pos = scene.AttachComponent<Components.Avatar>(e, avatars);
          avatars.data[pos].animations = new Dictionary<string, Components.Animation>();
 
-         Components.Animation andando = new Components.Animation(scene, "bolinha_trans", 32, 32, new int[] {500, 300, 200, 100, 100, 100, 100, 100, 100, 100, 100, 200, 300}, true);
-         Components.Animation parada = new Components.Animation(scene, "bolinha_trans", 32, 32, new int[] {1}, false);
+         Components.Animation andando = new Components.Animation(scene, "bolinha", 32, 32, new int[] {500, 300, 200, 100, 100, 100, 100, 100, 100, 100, 100, 200, 300}, true);
+         Components.Animation parada = new Components.Animation(scene, "bolinha", 32, 32, new int[] {1}, false);
          avatars.data[pos].animations.Add("parada", parada);
          avatars.data[pos].animations.Add("andando", andando);
          avatars.data[pos].currentAnimation = andando;
