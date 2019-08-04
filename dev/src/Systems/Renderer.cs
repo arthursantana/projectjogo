@@ -27,7 +27,7 @@ namespace Systems {
             Components.Animation animation = avatars.data[i].currentAnimation;
 
             animation.Run(gameTime);
-            spriteBatch.Draw(animation.spriteSheet, transforms.data[transformIndex].position, animation.Rect(), Color.White);
+            spriteBatch.Draw(animation.spriteSheet, Vector2.Subtract(transforms.data[transformIndex].position, new Vector2(16, 16)), animation.Rect(), Color.White);
          }
       }
    }

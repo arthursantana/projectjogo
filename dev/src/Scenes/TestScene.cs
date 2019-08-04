@@ -14,6 +14,9 @@ namespace Scenes {
       Systems.Physics physics;
       Systems.Renderer renderer;
 
+      int W = /*640; */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+      int H = /*420; */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+
       public TestScene(TopLevel.Game1 g, SpriteBatch sb) : base(g, sb) {
          transforms = RegisterComponentList<Components.Transform>();
          bodies = RegisterComponentList<Components.Body>();
@@ -32,16 +35,15 @@ namespace Scenes {
                transforms, componentListIndices[typeof(Components.Transform)]);
 
          Prefabs.Vivo.Create(this, transforms, bodies, behaviors, avatars);
-
          Random random = new Random();
-         for (ushort i = 0; i < 200; i++) {
-            Prefabs.Bolinha.Create(this, transforms, bodies, behaviors, avatars, random, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+         for (ushort i = 0; i < 500; i++) {
+            Prefabs.Bolinha.Create(this, transforms, bodies, behaviors, avatars, random, W, H);
          }
       }
 
       public new void Update(GameTime gameTime) {
          behavior.Update(gameTime);
-         physics.Update(gameTime, game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height);
+         physics.Update(gameTime, W, H);
       }
 
       public new void Draw(GameTime gameTime) {

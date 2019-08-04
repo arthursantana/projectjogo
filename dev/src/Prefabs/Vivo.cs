@@ -15,8 +15,8 @@ namespace Prefabs {
          ECS.Entity e = scene.NewEntity();
 
          pos = scene.AttachComponent<Components.Transform>(e, transforms);
-         transforms.data[pos].position.X = 200;
-         transforms.data[pos].position.Y = 200;
+         transforms.data[pos].position.X = 16;
+         transforms.data[pos].position.Y = 16;
 
          pos = scene.AttachComponent<Components.Body>(e, bodies);
          bodies.data[pos].velocity.X = 0;
@@ -28,8 +28,8 @@ namespace Prefabs {
          pos = scene.AttachComponent<Components.Avatar>(e, avatars);
          avatars.data[pos].animations = new Dictionary<string, Components.Animation>();
 
-         Components.Animation parado = new Components.Animation(scene, "vivo_idle", 32, 32, new int[] {100, 100}, true);
-         Components.Animation andando = new Components.Animation(scene, "vivo_walk", 32, 32, new int[] {100, 100}, true);
+         Components.Animation parado = new Components.Animation(scene, "vivo_idle", 32, 32, new int[] {140, 140}, true);
+         Components.Animation andando = new Components.Animation(scene, "vivo_walk", 32, 32, new int[] {140, 140}, true);
          avatars.data[pos].animations.Add("parado", parado);
          avatars.data[pos].animations.Add("andando", andando);
          avatars.data[pos].currentAnimation = parado;

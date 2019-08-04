@@ -69,9 +69,9 @@ namespace Systems {
                }
 
                float epsilon = 0.1f;
-               float speed = 200;
+               float speed = 100;
                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || gamepad.Triggers.Right > epsilon) {
-                  speed *= 1.5f;
+                  speed *= 2f;
                }
                bodies.data[bodyIndex].velocity.X = thumbSticks.X * speed;
                bodies.data[bodyIndex].velocity.Y = thumbSticks.Y * speed * -1;
