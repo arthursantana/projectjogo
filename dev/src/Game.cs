@@ -34,7 +34,7 @@ namespace TopLevel {
       }
 
       protected override void LoadContent() {
-         Song song = Content.Load<Song>("foi");
+         Song song = Content.Load<Song>("tomPulante");
          MediaPlayer.Play(song);
       }
 

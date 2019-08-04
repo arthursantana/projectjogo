@@ -6,31 +6,28 @@ namespace Systems {
       ECS.ComponentList<Components.Transform> transforms;
       ECS.ComponentList<Components.Body> bodies;
 
+      int transformsPos;
       int bodiesPos;
 
-      public Physics(ECS.ComponentList<Components.Transform> t, int tPos, ECS.ComponentList<Components.Body> b, int bPos) {
+      public Physics(ECS.ComponentList<Components.Transform> t, int tPos,
+            ECS.ComponentList<Components.Body> b, int bPos) {
          transforms = t;
          bodies = b;
 
+         transformsPos = tPos;
          bodiesPos = bPos;
       }
 
-      Random random = new Random();
-
       public void Update(GameTime gameTime, int W, int H) {
-         int temperature = 2;
-
          for (ushort i = 0; i < transforms.size; i++) {
             ECS.Entity entity = transforms.metadata[i].entity;
-            int j; // entity body index
+            int bodyIndex;
 
             if (entity.components[bodiesPos] == -1) continue;
-            else j = entity.components[bodiesPos];
+            else bodyIndex = entity.components[bodiesPos];
 
-            bodies.data[j].velocity.X += temperature * (float) (random.NextDouble() - 0.5);
-            bodies.data[j].velocity.Y += temperature * (float) (random.NextDouble() - 0.5);
-            transforms.data[i].position.X += bodies.data[j].velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds;
-            transforms.data[i].position.Y += bodies.data[j].velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            transforms.data[i].position.X += bodies.data[bodyIndex].velocity.X * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            transforms.data[i].position.Y += bodies.data[bodyIndex].velocity.Y * (float) gameTime.ElapsedGameTime.TotalSeconds;
             if (transforms.data[i].position.X > W)
                transforms.data[i].position.X = 0;
             if (transforms.data[i].position.Y > H)
@@ -39,6 +36,16 @@ namespace Systems {
                transforms.data[i].position.X = W;
             if (transforms.data[i].position.Y < -32)
                transforms.data[i].position.Y = H;
+
+            if (i != 0) {
+               float distX = transforms.data[i].position.X - transforms.data[0].position.X;
+               float distY = transforms.data[i].position.Y - transforms.data[0].position.Y;
+
+               float epsilon = 8*32f;
+               if (distX*distX + distY*distY < epsilon) {
+                  entity.components[transformsPos] = -1;
+               }
+            }
          }
       }
    }
