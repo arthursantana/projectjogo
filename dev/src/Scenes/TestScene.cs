@@ -14,8 +14,8 @@ namespace Scenes {
       Systems.Physics physics;
       Systems.Renderer renderer;
 
-      int W = /*640; */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-      int H = /*420; */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+      int W = /*640;// */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+      int H = /*420;// */GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
       public TestScene(TopLevel.Game1 g, SpriteBatch sb) : base(g, sb) {
          transforms = RegisterComponentList<Components.Transform>();
@@ -37,7 +37,10 @@ namespace Scenes {
          Prefabs.Vivo.Create(this, transforms, bodies, behaviors, avatars);
          Random random = new Random();
          for (ushort i = 0; i < 500; i++) {
-            Prefabs.Bolinha.Create(this, transforms, bodies, behaviors, avatars, random, W, H);
+            if (random.NextDouble() > 0.5)
+               Prefabs.Kirk.Create(this, transforms, bodies, behaviors, avatars, random, W, H);
+            else
+               Prefabs.Bolinha.Create(this, transforms, bodies, behaviors, avatars, random, W, H);
          }
       }
 
